@@ -1,0 +1,29 @@
+---
+
+- name: Install kibana with apt
+  apt:
+   name: kibana
+   update_cache: yes
+
+- name: Updating the config file to allow outside access
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'server.host:'
+   line: 'server.host: 0.0.0.0'
+
+- name: Defining server port
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'server.post:'
+   line: 'server.port: 5601'
+
+- name: Defining elasticsearch url
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'elasticsearch.urm:'
+   line: 'elasticsearch.url: "http://localhost:9200"'
+
+- name: Starting kibana
+  service:
+   name: kibana
+   state: started

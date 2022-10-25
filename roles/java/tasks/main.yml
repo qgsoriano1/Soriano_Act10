@@ -1,0 +1,14 @@
+---
+
+- name: Add the java ppa repo
+  apt_repository:
+   repo: ppa:webupd8team/java
+
+- name: Automatically accept the oravle license
+  shell: echo debconf shared/accepted-oracle-license-v1-1 true | sudo debconf-set-selections
+
+- name: Install java 8
+  apt:
+   name: orcale-java8-installer
+   state: present
+   update_cache: yes

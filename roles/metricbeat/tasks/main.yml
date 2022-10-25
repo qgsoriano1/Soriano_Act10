@@ -1,0 +1,11 @@
+---
+
+- name: Install metricbeat with apt
+  apt:
+   name: metricbeat
+   update_cache: yes
+
+- name: Starting metricbeat
+  service:
+   name: metricbeat
+   state: started
